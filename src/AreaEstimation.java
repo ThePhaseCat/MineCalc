@@ -3,162 +3,89 @@ import java.util.Scanner;
 
 public class AreaEstimation {
 
-    int revertState = 0;
+    int toolSelect;
+    double durability;
+    double enchantIncrease;
 
-    public void hi() {
-        System.out.println("test");
+    double areaSelected;
+
+    public AreaEstimation(int toolSelect, double durability, double enchantIncrease, double areaSelected) {
+        this.toolSelect = toolSelect;
+        this.durability = durability;
+        this.enchantIncrease = enchantIncrease;
+        this.areaSelected = areaSelected;
     }
 
+    //wooden, stone, iron, gold, diamond, netherite
+    //60, 132, 251, 33, 1562, 2031
+    //unbreaking levels
+    //1, 2, 3, 4
+    //multiply durability by enchantment level
+    //number calc is area/durability
+    public int getToolSelect() {
+        return toolSelect;
+    }
 
-    public void EstimateArea(int area) {
-        Scanner keyboard = new Scanner(System.in);
-        int pickSelect = 0;
-        int selector = 0;
-        String pickaxe = "";
-        int enchantLevel = 0;
-        double durability = 0;
-        double enchantIncrease = 0;
-        String enchant = "";
+    public double getDurability() {
+        return durability;
+    }
 
-        System.out.println("Are you using a pickaxe or shovel?");
-        System.out.println("1. Pickaxe");
-        System.out.println("2. Shovel");
-        selector = keyboard.nextInt();
+    public double getEnchantIncrease() {
+        return enchantIncrease;
+    }
 
-        if (selector == 1){
-            System.out.println("What pickaxe are you using?");
-            System.out.println("1. Wooden");
-            System.out.println("2. Stone");
-            System.out.println("3. Iron");
-            System.out.println("4. Gold");
-            System.out.println("5. Diamond");
-            System.out.println("6. Netherite");
-            pickSelect = keyboard.nextInt();
+    public double getAreaSelected() {
+        return areaSelected;
+    }
 
-            if (pickSelect == 1){
-                durability = 60;
-                pickaxe = "Wooden";
-            }
-            if (pickSelect == 2){
-                durability = 132;
-                pickaxe = "Stone";
-            }
-            if (pickSelect == 3){
-                durability = 251;
-                pickaxe = "Iron";
-            }
-            if (pickSelect == 4){
-                durability = 33;
-                pickaxe = "Gold";
-            }
-            if (pickSelect == 5){
-                durability = 1562;
-                pickaxe = "Diamond";
-            }
-            if (pickSelect == 6){
-                durability = 2032;
-                pickaxe = "Netherite";
-            }
+    public void setToolSelect(int toolSelect) {
+        this.toolSelect = toolSelect;
 
-            System.out.println("What enchantment level of Unbreaking are you using?");
-            System.out.println("1. 0");
-            System.out.println("2. Unbreaking 1");
-            System.out.println("3. Unbreaking 2");
-            System.out.println("4. Unbreaking 3");
-            enchantLevel = keyboard.nextInt();
-
-            if (enchantLevel == 1){
-                enchantIncrease = 1;
-                enchant = "no Unbreaking";
-            }
-            if (enchantLevel == 2){
-                enchantIncrease = 2;
-                enchant = "Unbreaking 1";
-            }
-            if (enchantLevel == 3){
-                enchantIncrease = 3;
-                enchant = "Unbreaking 2";
-            }
-            if (enchantLevel == 4){
-                enchantIncrease = 4;
-                enchant = "Unbreaking 3";
-            }
-
-            //get new durability number
-            durability = durability * enchantIncrease;
-            double numOfPicks = area/durability;
-            System.out.println("You require " + numOfPicks + " " + pickaxe + " pickaxe's to clear an area of " + area + " blocks");
-            revertState = 1;
+        if (toolSelect == 1){
+            this.durability = 60 * this.enchantIncrease;
         }
-        if (selector == 2){
-            System.out.println("What shovel are you using?");
-            System.out.println("1. Wooden");
-            System.out.println("2. Stone");
-            System.out.println("3. Iron");
-            System.out.println("4. Gold");
-            System.out.println("5. Diamond");
-            System.out.println("6. Netherite");
-            pickSelect = keyboard.nextInt();
-
-            if (pickSelect == 1){
-                durability = 60;
-                pickaxe = "Wooden";
-            }
-            if (pickSelect == 2){
-                durability = 132;
-                pickaxe = "Stone";
-            }
-            if (pickSelect == 3){
-                durability = 251;
-                pickaxe = "Iron";
-            }
-            if (pickSelect == 4){
-                durability = 33;
-                pickaxe = "Gold";
-            }
-            if (pickSelect == 5){
-                durability = 1562;
-                pickaxe = "Diamond";
-            }
-            if (pickSelect == 6){
-                durability = 2032;
-                pickaxe = "Netherite";
-            }
-
-            System.out.println("What enchantment level of Unbreaking are you using?");
-            System.out.println("1. 0");
-            System.out.println("2. Unbreaking 1");
-            System.out.println("3. Unbreaking 2");
-            System.out.println("4. Unbreaking 3");
-            enchantLevel = keyboard.nextInt();
-
-            if (enchantLevel == 1){
-                enchantIncrease = 1;
-                enchant = "no Unbreaking";
-            }
-            if (enchantLevel == 2){
-                enchantIncrease = 2;
-                enchant = "Unbreaking 1";
-            }
-            if (enchantLevel == 3){
-                enchantIncrease = 3;
-                enchant = "Unbreaking 2";
-            }
-            if (enchantLevel == 4){
-                enchantIncrease = 4;
-                enchant = "Unbreaking 3";
-            }
-
-            //get new durability number
-            durability = durability * enchantIncrease;
-            double numOfPicks = area/durability;
-            System.out.println("You require " + numOfPicks + " " + pickaxe + " shovels to clear an area of " + area + " blocks");
-            revertState = 1;
+        else if (toolSelect == 2){
+            this.durability = 132 * this.enchantIncrease;
+        }
+        else if (toolSelect == 3){
+            this.durability = 251 * this.enchantIncrease;
+        }
+        else if (toolSelect == 4){
+            this.durability = 33 * this.enchantIncrease;
+        }
+        else if (toolSelect == 5){
+            this.durability = 1562 * this.enchantIncrease;
+        }
+        else if (toolSelect == 6){
+            this.durability = 2031 * this.enchantIncrease;
         }
     }
 
 
-    public int revert(){
-        return revertState;
+    public void setEnchantIncrease(double enchantIncrease) {
+        this.enchantIncrease = enchantIncrease;
+
+        if (this.toolSelect == 1){
+            this.durability = 60 * this.enchantIncrease;
+        }
+        else if (this.toolSelect == 2){
+            this.durability = 132 * this.enchantIncrease;
+        }
+        else if (this.toolSelect == 3){
+            this.durability = 251 * this.enchantIncrease;
+        }
+        else if (this.toolSelect == 4){
+            this.durability = 33 * this.enchantIncrease;
+        }
+        else if (this.toolSelect == 5){
+            this.durability = 1562 * this.enchantIncrease;
+        }
+        else if (this.toolSelect == 6){
+            this.durability = 2031 * this.enchantIncrease;
+        }
+    }
+
+    public void setAreaSelected(double areaSelected) {
+        this.areaSelected = areaSelected;
     }
 }

@@ -11,12 +11,14 @@ import java.util.ArrayList;
 
 public class Main{
 
-    static int length = 0;
-    static int width = 0;
-    static int height = 0;
-    static int area = 0;
+    static Area area = new Area(0, 0, 0);
+    static AreaEstimation areaEstimation = new AreaEstimation(0, 0, 0, 0);
 
     public static void main(String[] args) {
+        //define stuff here
+
+
+
         JFrame mainScreen = new JFrame("MineCalc - Selection Service");
         mainScreen.setLayout(new BoxLayout(mainScreen.getContentPane(), BoxLayout.Y_AXIS));
 
@@ -89,9 +91,9 @@ public class Main{
         JLabel areaChangeDataLabel = new JLabel("Enter information here (Press enter when done with input to save selection)");
         areaChangeDataLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        JLabel lengthLabel = new JLabel("Length: " + length);
-        JLabel widthLabel = new JLabel("Width: " + width);
-        JLabel heightLabel = new JLabel("Height: "+ height);
+        JLabel lengthLabel = new JLabel("Length: " + area.getLength());
+        JLabel widthLabel = new JLabel("Width: " + area.getWidth());
+        JLabel heightLabel = new JLabel("Height: "+ area.getHeight());
 
         lengthLabel.setHorizontalAlignment(JLabel.CENTER);
         widthLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -106,20 +108,18 @@ public class Main{
         heightField.setHorizontalAlignment(JTextField.CENTER);
 
         lengthField.addActionListener(e -> {
-            length = Integer.parseInt(lengthField.getText());
-            lengthLabel.setText("Length: " + length);
+            area.setLength(Integer.parseInt(lengthField.getText()));
+            lengthLabel.setText("Length: " + area.getLength());
         });
 
         widthField.addActionListener(e -> {
-            width = Integer.parseInt(widthField.getText());
-            widthLabel.setText("Width: " + width);
+            area.setWidth(Integer.parseInt(widthField.getText()));
+            widthLabel.setText("Width: " + area.getWidth());
         });
 
         heightField.addActionListener(e -> {
-            height = Integer.parseInt(heightField.getText());
-            heightLabel.setText("Height: " + height);
-            //areaGetData();
-            //areaChangeDataScreen.dispose();
+            area.setHeight(Integer.parseInt(heightField.getText()));
+            heightLabel.setText("Height: " + area.getHeight());
         });
 
         areaChangeDataScreen.add(areaChangeDataLabel);
@@ -141,10 +141,10 @@ public class Main{
         JFrame areaGetDataScreen = new JFrame("MineCalc - Area Service - Get Area Data");
         areaGetDataScreen.setLayout(new BoxLayout(areaGetDataScreen.getContentPane(), BoxLayout.Y_AXIS));
 
-        JLabel lengthLabel = new JLabel("Length: " + length);
-        JLabel widthLabel = new JLabel("Width: " + width);
-        JLabel heightLabel = new JLabel("Height: " + height);
-        JLabel areaLabel = new JLabel("Area: " + calArea(length, width, height));
+        JLabel lengthLabel = new JLabel("Length: " + area.getLength());
+        JLabel widthLabel = new JLabel("Width: " + area.getWidth());
+        JLabel heightLabel = new JLabel("Height: " + area.getHeight());
+        JLabel areaLabel = new JLabel("Area: " + area.AreaCalc());
 
         lengthLabel.setHorizontalAlignment(JLabel.CENTER);
         widthLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -162,12 +162,135 @@ public class Main{
         areaGetDataScreen.setLocation(600, 200);
     }
 
-    public static void areaGetEstimations(){
+    public static void areaGetEstimations1(){
+        areaEstimation.setAreaSelected(area.AreaCalc());
 
+        JFrame areaGetEstimationsScreen = new JFrame("MineCalc - Area Service - Get Estimations from Area Data - Tool Select");
+        areaGetEstimationsScreen.setLayout(new BoxLayout(areaGetEstimationsScreen.getContentPane(), BoxLayout.Y_AXIS));
+
+        JButton pickaxeButton = new JButton("Pickaxe");
+        JButton shovelButton = new JButton("Shovel");
+
+        pickaxeButton.addActionListener(e -> {
+            areaGetEstimations2("Pickaxe");
+            areaGetEstimationsScreen.dispose();
+        });
+
+        shovelButton.addActionListener(e -> {
+            areaGetEstimations2("Shovel");
+            areaGetEstimationsScreen.dispose();
+        });
+
+        areaGetEstimationsScreen.add(pickaxeButton);
+        areaGetEstimationsScreen.add(shovelButton);
+
+        areaGetEstimationsScreen.setSize(300, 200);
+        areaGetEstimationsScreen.setVisible(true);
+        areaGetEstimationsScreen.setLocationRelativeTo(null);
+        areaGetEstimationsScreen.setLocation(800, 200);
     }
 
-    public static int calArea(int len, int wid, int hei){
-        int sum = len * wid * hei;
-        return sum;
+    public static void areaGetEstimations2(String tool){
+        JFrame areaGetEstimationsScreen = new JFrame("MineCalc - Area Service - Get Estimations from Area Data - Tool Type Select");
+        areaGetEstimationsScreen.setLayout(new BoxLayout(areaGetEstimationsScreen.getContentPane(), BoxLayout.Y_AXIS));
+
+        JButton woodButton = new JButton("Wood");
+        JButton stoneButton = new JButton("Stone");
+        JButton ironButton = new JButton("Iron");
+        JButton goldButton = new JButton("Gold");
+        JButton diamondButton = new JButton("Diamond");
+        JButton netheriteButton = new JButton("Netherite");
+
+        woodButton.addActionListener(e -> {
+            areaEstimation.setToolSelect(1);
+            areaGetEstimations3(tool);
+            areaGetEstimationsScreen.dispose();
+        });
+
+        stoneButton.addActionListener(e -> {
+            areaEstimation.setToolSelect(2);
+            areaGetEstimations3(tool);
+            areaGetEstimationsScreen.dispose();
+        });
+
+        ironButton.addActionListener(e -> {
+            areaEstimation.setToolSelect(3);
+            areaGetEstimations3(tool);
+            areaGetEstimationsScreen.dispose();
+        });
+
+        goldButton.addActionListener(e -> {
+            areaEstimation.setToolSelect(4);
+            areaGetEstimations3(tool);
+            areaGetEstimationsScreen.dispose();
+        });
+
+        diamondButton.addActionListener(e -> {
+            areaEstimation.setToolSelect(5);
+            areaGetEstimations3(tool);
+            areaGetEstimationsScreen.dispose();
+        });
+
+        netheriteButton.addActionListener(e -> {
+            areaEstimation.setToolSelect(6);
+            areaGetEstimations3(tool);
+            areaGetEstimationsScreen.dispose();
+        });
+
+        areaGetEstimationsScreen.add(woodButton);
+        areaGetEstimationsScreen.add(stoneButton);
+        areaGetEstimationsScreen.add(ironButton);
+        areaGetEstimationsScreen.add(goldButton);
+        areaGetEstimationsScreen.add(diamondButton);
+        areaGetEstimationsScreen.add(netheriteButton);
+
+        areaGetEstimationsScreen.setSize(300, 200);
+        areaGetEstimationsScreen.setVisible(true);
+        areaGetEstimationsScreen.setLocationRelativeTo(null);
+        areaGetEstimationsScreen.setLocation(1000, 200);
+    }
+
+    public static void areaGetEstimations3(String tool){
+        JFrame areaGetEstimationsScreen = new JFrame("MineCalc - Area Service - Get Estimations from Area Data - Enchant Select");
+        areaGetEstimationsScreen.setLayout(new BoxLayout(areaGetEstimationsScreen.getContentPane(), BoxLayout.Y_AXIS));
+
+        JButton noUnbreakingButton = new JButton("No Unbreaking");
+        JButton unbreaking1Button = new JButton("Unbreaking 1");
+        JButton unbreaking2Button = new JButton("Unbreaking 2");
+        JButton unbreaking3Button = new JButton("Unbreaking 3");
+
+        noUnbreakingButton.addActionListener(e -> {
+            areaEstimation.setEnchantIncrease(1);
+            areaGetEstimations4(tool);
+            areaGetEstimationsScreen.dispose();
+        });
+
+        unbreaking1Button.addActionListener(e -> {
+            areaEstimation.setEnchantIncrease(2);
+            areaGetEstimations4(tool);
+            areaGetEstimationsScreen.dispose();
+        });
+
+        unbreaking2Button.addActionListener(e -> {
+            areaEstimation.setEnchantIncrease(3);
+            areaGetEstimations4(tool);
+            areaGetEstimationsScreen.dispose();
+        });
+
+        unbreaking3Button.addActionListener(e -> {
+            areaEstimation.setEnchantIncrease(4);
+            areaGetEstimations4(tool);
+            areaGetEstimationsScreen.dispose();
+        });
+
+        areaGetEstimationsScreen.add(noUnbreakingButton);
+        areaGetEstimationsScreen.add(unbreaking1Button);
+        areaGetEstimationsScreen.add(unbreaking2Button);
+        areaGetEstimationsScreen.add(unbreaking3Button);
+
+        areaGetEstimationsScreen.setSize(300, 200);
+        areaGetEstimationsScreen.setVisible(true);
+        areaGetEstimationsScreen.setLocationRelativeTo(null);
+        areaGetEstimationsScreen.setLocation(1200, 200);
     }
 }
