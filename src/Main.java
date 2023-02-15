@@ -1,12 +1,15 @@
+import net.querz.nbt.io.NBTInputStream;
+import net.querz.nbt.io.NBTUtil;
+import net.querz.nbt.io.NamedTag;
+import net.querz.nbt.tag.CompoundTag;
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
 import java.util.Scanner; //for reading keyboard input and Files
-import java.io.BufferedReader; //Fast way to read large files and other data streams
-import java.io.FileReader; //used when using BufferedReader to read a File
-import java.io.BufferedWriter; //Fast way to write large files and other data streams
-import java.io.FileWriter; //used when using BufferedWriter to write a File
-import java.io.IOException; //Exception that can be thrown by BufferedReader and BufferedWriter
 import java.util.ArrayList;
+import java.util.Arrays;
+import net.querz.nbt.tag.CompoundTag;
 
 
 public class Main{
@@ -31,6 +34,14 @@ public class Main{
 
         areaButton.addActionListener(e -> {
             area();
+        });
+
+        structureButton.addActionListener(e -> {
+            try {
+                structure();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         mainScreen.add(areaButton);
@@ -68,7 +79,7 @@ public class Main{
         });
 
         getEstimationsButton.addActionListener(e -> {
-            areaGetEstimations();
+            areaGetEstimations1();
         });
 
         areaScreen.add(changeDataButton);
@@ -187,7 +198,7 @@ public class Main{
         areaGetEstimationsScreen.setSize(300, 200);
         areaGetEstimationsScreen.setVisible(true);
         areaGetEstimationsScreen.setLocationRelativeTo(null);
-        areaGetEstimationsScreen.setLocation(800, 200);
+        areaGetEstimationsScreen.setLocation(600, 200);
     }
 
     public static void areaGetEstimations2(String tool){
@@ -247,7 +258,7 @@ public class Main{
         areaGetEstimationsScreen.setSize(300, 200);
         areaGetEstimationsScreen.setVisible(true);
         areaGetEstimationsScreen.setLocationRelativeTo(null);
-        areaGetEstimationsScreen.setLocation(1000, 200);
+        areaGetEstimationsScreen.setLocation(600, 200);
     }
 
     public static void areaGetEstimations3(String tool){
@@ -291,6 +302,70 @@ public class Main{
         areaGetEstimationsScreen.setSize(300, 200);
         areaGetEstimationsScreen.setVisible(true);
         areaGetEstimationsScreen.setLocationRelativeTo(null);
-        areaGetEstimationsScreen.setLocation(1200, 200);
+        areaGetEstimationsScreen.setLocation(600, 200);
+    }
+
+    public static void areaGetEstimations4(String tool){
+        String material = "";
+        String unbreaking = "";
+
+        if(areaEstimation.getToolSelect() == 1){
+            material = "Wood";
+        } else if(areaEstimation.getToolSelect() == 2){
+            material = "Stone";
+        } else if(areaEstimation.getToolSelect() == 3){
+            material = "Iron";
+        } else if(areaEstimation.getToolSelect() == 4){
+            material = "Gold";
+        } else if(areaEstimation.getToolSelect() == 5){
+            material = "Diamond";
+        } else if(areaEstimation.getToolSelect() == 6){
+            material = "Netherite";
+        }
+
+        if(areaEstimation.getEnchantIncrease() == 1){
+            unbreaking = "No Unbreaking";
+        } else if(areaEstimation.getEnchantIncrease() == 2){
+            unbreaking = "Unbreaking 1";
+        } else if(areaEstimation.getEnchantIncrease() == 3){
+            unbreaking = "Unbreaking 2";
+        } else if(areaEstimation.getEnchantIncrease() == 4){
+            unbreaking = "Unbreaking 3";
+        }
+
+        double finalResult = area.AreaCalc()/areaEstimation.getDurability();
+
+
+        JFrame areaGetEstimationsScreen = new JFrame("MineCalc - Area Service - Get Estimations from Area Data - Final Results");
+        areaGetEstimationsScreen.setLayout(new BoxLayout(areaGetEstimationsScreen.getContentPane(), BoxLayout.Y_AXIS));
+
+        JLabel areaLabel = new JLabel("Area: " + area.AreaCalc());
+        JLabel toolLabel = new JLabel("Tool: " + tool);
+        JLabel materialLabel = new JLabel("Material: " + material);
+        JLabel unbreakingLabel = new JLabel("Unbreaking: " + unbreaking);
+        JLabel finalResults = new JLabel("You will need " + finalResult + " " + tool + "s to mine this area.");
+
+        areaGetEstimationsScreen.add(areaLabel);
+        areaGetEstimationsScreen.add(toolLabel);
+        areaGetEstimationsScreen.add(materialLabel);
+        areaGetEstimationsScreen.add(unbreakingLabel);
+        areaGetEstimationsScreen.add(finalResults);
+
+        areaGetEstimationsScreen.setSize(300, 200);
+        areaGetEstimationsScreen.setVisible(true);
+        areaGetEstimationsScreen.setLocationRelativeTo(null);
+        areaGetEstimationsScreen.setLocation(600, 200);
+    }
+
+    public static void structure() throws IOException {
+        //NamedTag namedTag = NBTUtil.read("structures/igloo.nbt");
+
+        NBTInputStream nbtInputStream = new NBTInputStream(new FileInputStream("structures/igloo.nbt"));
+
+        JFrame structureScreen = new JFrame("MineCalc - Structure Service");
+        structureScreen.setLayout(new BoxLayout(structureScreen.getContentPane(), BoxLayout.Y_AXIS));
+
+        JLabel structureLabel = new JLabel("Structure File Loaded: " + nbtInputStream.readRawTag.getName());
+
     }
 }
