@@ -9,6 +9,8 @@ import java.io.*;
 import java.util.Scanner; //for reading keyboard input and Files
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.io.BufferedReader; //Fast way to read large files and other data streams
+import java.io.FileReader; //used when using BufferedReader to read a File
 import net.querz.nbt.tag.CompoundTag;
 
 
@@ -17,9 +19,18 @@ public class Main{
     static Area area = new Area(0, 0, 0);
     static AreaEstimation areaEstimation = new AreaEstimation(0, 0, 0, 0);
 
-    public static void main(String[] args) {
-        //define stuff here
+    static blockData blocksData;
 
+    static {
+        try {
+            blocksData = new blockData("data/blocks.csv");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        //define stuff here
 
 
         JFrame mainScreen = new JFrame("MineCalc - Selection Service");
@@ -37,8 +48,12 @@ public class Main{
         });
 
         structureButton.addActionListener(e -> {
+
+        });
+
+        blockButton.addActionListener(e -> {
             try {
-                structure();
+                block();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -357,15 +372,27 @@ public class Main{
         areaGetEstimationsScreen.setLocation(600, 200);
     }
 
-    public static void structure() throws IOException {
-        //NamedTag namedTag = NBTUtil.read("structures/igloo.nbt");
 
-        NBTInputStream nbtInputStream = new NBTInputStream(new FileInputStream("structures/igloo.nbt"));
+    //put stuff for structure data ana here
 
-        JFrame structureScreen = new JFrame("MineCalc - Structure Service");
-        structureScreen.setLayout(new BoxLayout(structureScreen.getContentPane(), BoxLayout.Y_AXIS));
+    //end of that stuff
 
-        JLabel structureLabel = new JLabel("Structure File Loaded: " + nbtInputStream.readRawTag.getName());
 
+
+    public static String[] block() throws IOException {
+        FileReader file = new FileReader("data/blocks.csv");
+        BufferedReader myFile = new BufferedReader(file);
+
+        ArrayList<String[]> csvdata = new ArrayList<String[]>();
+
+        String[] row;
+        String line = myFile.readLine();
+        while (line != null) {
+            row = line.split(",");
+            csvdata.add(row);
+            line = myFile.readLine();
+        }
+        myFile.close();
+        return csvdata.get(0);
     }
 }
