@@ -19,19 +19,29 @@ public class Main{
     static Area area = new Area(0, 0, 0);
     static AreaEstimation areaEstimation = new AreaEstimation(0, 0, 0, 0);
 
-    static blockData blocksData;
+    static ArrayList<String[]> blockInfo = new ArrayList<String[]>();
 
-    static {
-        try {
-            blocksData = new blockData("data/blocks.csv");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+
+    public static ArrayList<String[]> readDataFromFile(String filename) throws IOException {
+        FileReader file = new FileReader(filename);
+        BufferedReader myFile = new BufferedReader(file);
+
+        ArrayList<String[]> csvdata = new ArrayList<String[]>();
+        String[] row;
+        String line = myFile.readLine();
+        while (line != null) {
+            row = line.split(",");
+            csvdata.add(row);
+            line = myFile.readLine();
         }
+        myFile.close();
+        return csvdata;
     }
 
     public static void main(String[] args) throws IOException {
         //define stuff here
 
+        blockInfo = readDataFromFile("data/blocks.csv");
 
         JFrame mainScreen = new JFrame("MineCalc - Selection Service");
         mainScreen.setLayout(new BoxLayout(mainScreen.getContentPane(), BoxLayout.Y_AXIS));
@@ -52,11 +62,7 @@ public class Main{
         });
 
         blockButton.addActionListener(e -> {
-            try {
-                block();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+            block();
         });
 
         mainScreen.add(areaButton);
@@ -379,20 +385,8 @@ public class Main{
 
 
 
-    public static String[] block() throws IOException {
-        FileReader file = new FileReader("data/blocks.csv");
-        BufferedReader myFile = new BufferedReader(file);
+    public static void block(){
+        System.out.println(blockInfo.get(4));
 
-        ArrayList<String[]> csvdata = new ArrayList<String[]>();
-
-        String[] row;
-        String line = myFile.readLine();
-        while (line != null) {
-            row = line.split(",");
-            csvdata.add(row);
-            line = myFile.readLine();
-        }
-        myFile.close();
-        return csvdata.get(0);
     }
 }

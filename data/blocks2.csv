@@ -1,0 +1,227 @@
+STONE,Pickaxe,Overworld,Underground,No
+GRANITE,Pickaxe,Overworld,Underground,No
+POLISHED_GRANITE,Pickaxe,n/a,n/a,Yes
+DIORITE,Pickaxe,Overworld,Underground,No
+POLISHED_DIORITE,Pickaxe,n/a,n/a,Yes
+ANDESITE,Pickaxe,Overworld,Underground,No
+POLISHED_ANDESITE,Pickaxe,n/a,n/a,Yes
+GRASS_BLOCK,Shovel,Overworld,Most biomes,No
+DIRT,Shovel,Overworld,Most biomes,No
+COARSE_DIRT,Shovel,Overworld,Taiga,No
+PODZOL,Shovel,Overworld,Taiga,No
+COBBLESTONE,Pickaxe,n/a,n/a,No
+OAK_PLANKS,Axe,n/a,n/a,Yes
+SPRUCE_PLANKS,Axe,n/a,n/a,Yes
+BIRCH_PLANKS,Axe,n/a,n/a,Yes
+JUNGLE_PLANKS,Axe,n/a,n/a,Yes
+ACACIA_PLANKS,Axe,n/a,n/a,Yes
+DARK_OAK_PLANKS,Axe,n/a,n/a,Yes
+MANGROVE_PLANKS,Axe,n/a,n/a,Yes
+BAMBOO_PLANKS,Axe,n/a,n/a,Yes
+BAMBOO_MOSAIC,Axe,n/a,n/a,Yes
+OAK_SAPLING,Any,Overworld,Oak Tree,No
+SPRUCE_SAPLING,Any,Overworld,Spruce Tree,No
+BIRCH_SAPLING,Any,Overworld,Birch Tree,No
+JUNGLE_SAPLING,Any,Overworld,Jungle Tree,No
+ACACIA_SAPLING,Any,Overworld,Acacia Tree,No
+DARK_OAK_SAPLING,Any,Overworld,Dark Oak Tree,No
+MANGROVE_PROPAGULE,Any,Overworld,Mangrove Tree,No
+BEDROCK,None,Overworld/Nether,Bottom/Top of World,No
+SAND,Shovel,Overworld,Desert/Beach,No
+RED_SAND,Shovel,Overworld,Mesa,No
+GRAVEL,Shovel,Overworld,Underground/Ocean,No
+GOLD_ORE,Pickaxe,Overworld,Underground,No
+IRON_ORE,Pickaxe,Overworld,Underground,No
+COAL_ORE,Pickaxe,Overworld,Underground,No
+NETHER_GOLD_ORE,Pickaxe,Nether,Everywhere,No
+OAK_LOG,Axe,Overworld,Oak Tree,No
+SPRUCE_LOG,Axe,Overworld,Spruce Tree,No
+BIRCH_LOG,Axe,Overworld,Birch Tree,No
+JUNGLE_LOG,Axe,Overworld,Jungle Tree,No
+ACACIA_LOG,Axe,Overworld,Acacia Tree,No
+DARK_OAK_LOG,Axe,Overworld,Dark Oak Tree,No
+MANGROVE_LOG,Axe,Overworld,Mangrove Tree,No
+BAMBOO_BLOCK,Axe,n/a,n/a,Yes
+OAK_LEAVES,Shears,Overworld,Oak Tree,No
+SPRUCE_LEAVES,Shears,Overworld,Spruce Tree,No
+BIRCH_LEAVES,Shears,Overworld,Birch Tree,No
+JUNGLE_LEAVES,Shears,Overworld,Jungle Tree,No
+ACACIA_LEAVES,Shears,Overworld,Acacia Tree,No
+DARK_OAK_LEAVES,Shears,Overworld,Dark Oak Tree,No
+MANGROVE_LEAVES,Shears,Overworld,Mangrove Tree,No
+SPONGE,Hoe,Overworld,Sea Temple,No
+GLASS,None,n/a,n/a,Yes
+LAPIS_ORE,Pickaxe,Overworld,Underground,No
+LAPIS_BLOCK,Pickaxe,n/a,n/a,Yes
+DISPENSER,Pickaxe,n/a,n/a,Yes
+SANDSTONE,Pickaxe,Overworld,Desert,Yes
+NOTE_BLOCK,Axe,n/a,n/a,Yes
+POWERED_RAIL,Pickaxe,n/a,n/a,Yes
+DETECTOR_RAIL,Pickaxe,n/a,n/a,Yes
+STICKY_PISTON,Pickaxe,n/a,n/a,Yes
+COBWEB,Sword,Overworld,Underground,Yes
+PISTON,Pickaxe,n/a,n/a,Yes
+WOOL,Shears,Overworld,Structures/Sheep,Yes
+GOLD_BLOCK,Pickaxe,Nether,Structure,Yes
+IRON_BLOCK,Pickaxe,n/a,n/a,Yes
+BRICKS,Pickaxe,n/a,n/a,Yes
+TNT,Any,Overworld,Desert Temple,Yes
+BOOKSHELF,Axe,Overworld,Stronghold,Yes
+OBSIDIAN,Pickaxe,n/a,Water and Lava,No
+TORCH,Any,Overworld,Most Structures,Yes
+OAK_STAIRS,Axe,n/a,n/a,Yes
+CHEST,Axe,All Dimensions,Most Structures,Yes
+DIAMOND_ORE,Pickaxe,Overworld,Underground,No
+DIAMOND_BLOCK,Pickaxe,n/a,n/a,Yes
+CRAFTING_TABLE,Axe,n/a,n/a,Yes
+FURNACE,Pickaxe,n/a,n/a,Yes
+SIGN,Axe,n/a,n/a,Yes
+DOOR,Axe,Overworld,Villages,Yes
+LADDER,Axe,Overworld/End,Most Structures,Yes
+RAIL,Pickaxe,Overworld,Mineshaft,Yes
+HANGING_SIGN,Axe,n/a,n/a,Yes
+LEVER,Pickaxe,n/a,n/a,Yes
+PRESSURE_PLATE,Pickaxe/Axe,n/a,n/a,Yes
+IRON_DOOR,Pickaxe,n/a,n/a,Yes
+REDSTONE_ORE,Pickaxe,Overworld,Underground,No
+REDSTONE_TORCH,Any,n/a,n/a,Yes
+BUTTON,Pickaxe/Axe,n/a,n/a,Yes
+SNOW,Shovel,Overworld,Snow Biomes,No
+ICE,Pickaxe,Overworld,Snow Biomes,No
+CACTUS,Any,Overworld,Desert,No
+CLAY,Shovel,Overworld,Under Water,No
+SUGAR_CANE,Any,Overworld,By Water,No
+JUKEBOX,Axe,n/a,n/a,Yes
+FENCE,Axe,Overworld,Villages,Yes
+PUMPKIN,Axe,Overworld,Everywhere,No
+NETHERRACK,Pickaxe,Nether,Most Biomes,No
+SOUL_SAND,Shovel,Nether,Soul Sand Valley,No
+SOUL_SOIL,Shovel,Nether,Soul Sand Valley,No
+BASALT,Pickaxe,Nether,Basalt Delta,No
+POLISHED_BASALT,Pickaxe,n/a,n/a,Yes
+SOUL_TORCH,Any,n/a,n/a,Yes
+GLOWSTONE,Pickaxe,Nether,Anywhere,No
+JACK_O_LANTERN,Axe,n/a,n/a,Yes
+CAKE,Any,n/a,n/a,Yes
+REPEATER,Pickaxe,n/a,n/a,Yes
+STAINED_GLASS,None,n/a,n/a,Yes
+TRAPDOOR,Axe,n/a,n/a,Yes
+STONE_BRICKS,Pickaxe,Overworld,Stronghold/Ancient City,Yes
+MUD_BRICKS,Pickaxe,n/a,n/a,Yes
+MUSHROOM_BLOCK,Axe,n/a,n/a,Yes
+IRON_BARS,Pickaxe,Overworld,Most Structures,Yes
+CHAIN,Pickaxe,Overworld,Mineshaft,Yes
+GLASS_PANE,None,n/a,n/a,Yes
+MELON,Axe,n/a,n/a,No
+VINE,Shears,Overworld,Jungle,No
+GLOW_LICHEN,Shears,Overworld,Deep Underground,No
+FENCE_GATE,Axe,n/a,n/a,Yes
+BRICK_STAIRS,Pickaxe,n/a,n/a,Yes
+STONE_BRICK_STAIRS,Pickaxe,n/a,n/a,Yes
+MUD_BRICK_STAIRS,Pickaxe,n/a,n/a,Yes
+MYCELIUM,Shovel (Silk Touch),Overworld,Mushroom Island,No
+NETHER_BRICKS,Pickaxe,Nether,Nether Fortress,Yes
+NETHER_BRICK_STAIRS,Pickaxe,n/a,n/a,Yes
+NETHER_WART,None,Nether,Nether Fortress,No
+ENCHANTING_TABLE,Pickaxe,n/a,n/a,Yes
+BREWING_STAND,Pickaxe,n/a,n/a,Yes
+CAULDRON,Pickaxe,Overworld,Stronghold,Yes
+END_STONE,Pickaxe,End,Everywhere,No
+REDSTONE_LAMP,Pickaxe,Overworld,Ancient City,Yes
+SANDSTONE_STAIRS,Pickaxe,n/a,n/a,Yes
+EMERALD_ORE,Pickaxe,Overworld,Underground,No
+ENDER_CHEST,Pickaxe (Silk Touch),End,End City,Yes
+EMERALD_BLOCK,Pickaxe,n/a,n/a,Yes
+SPRUCE_STAIRS,Axe,n/a,n/a,Yes
+BIRCH_STAIRS,Axe,n/a,n/a,Yes
+JUNGLE_STAIRS,Axe,n/a,n/a,Yes
+BEACON,Pickaxe,n/a,n/a,Yes
+WALL,Pickaxe,n/a,n/a,Yes
+FLOWER_POT,Pickaxe,n/a,n/a,Yes
+BUTTON,Axe,n/a,n/a,Yes
+ANVIL,Pickaxe,Overworld,Village,Yes
+COMPARATOR,Pickaxe,n/a,n/a,Yes
+DAYLIGHT_DETECTOR,Pickaxe,n/a,n/a,Yes
+NETHER_QUARTZ_ORE,Pickaxe,Nether,Everywhere,No
+HOPPER,Pickaxe,n/a,n/a,Yes
+REDSTONE_BLOCK,Pickaxe,n/a,n/a,Yes
+QUARTZ_BLOCK,Pickaxe,n/a,n/a,Yes
+ACTIVATOR_RAIL,Pickaxe,n/a,n/a,Yes
+DROPPER,Pickaxe,n/a,n/a,Yes
+TERRACOTTA,Pickaxe,Overworld,Mesa,No
+STAINED_GLASS_PANE,None,n/a,n/a,Yes
+SLIME_BLOCK,Any,n/a,n/a,Yes
+IRON_TRAPDOOR,Pickaxe,n/a,n/a,Yes
+PRISMARINE,Pickaxe,Overworld,Sea Temple,Yes
+PRISMARINE_BRICKS,Pickaxe,Overworld,Sea Temple,Yes
+DARK_PRISMARINE,Pickaxe,Overworld,Sea Temple,Yes
+PRISMARINE_STAIRS,Pickaxe,Overworld,Sea Temple,Yes
+PRISMARINE_BRICK_STAIRS,Pickaxe,Overworld,Sea Temple,Yes
+DARK_PRISMARINE_STAIRS,Pickaxe,Overworld,Sea Temple,Yes
+PRISMARINE_SLAB,Pickaxe,n/a,n/a,Yes
+PRISMARINE_BRICK_SLAB,Pickaxe,n/a,n/a,Yes
+DARK_PRISMARINE_SLAB,Pickaxe,n/a,n/a,Yes
+SEA_LANTERN,None,Overworld,Sea Temple,Yes
+HAY_BLOCK,Hoe,Overworld,Village,Yes
+CARPET,Any,n/a,n/a,Yes
+COAL_BLOCK,Pickaxe,n/a,n/a,Yes
+PACKED_ICE,Pickaxe,Overworld,Ice Ocean,Yes
+BANNER,Axe,n/a,n/a,Yes
+RED_SANDSTONE,Pickaxe,Overworld,Mesa,Yes
+SLAB,Axe/Pickaxe,n/a,n/a,Yes
+STONE_SLAB,Pickaxe,n/a,n/a,Yes
+END_ROD,Pickaxe,End,End City,Yes
+CHORUS_PLANT,Axe,End,Everywhere,No
+PURPUR_BLOCK,Pickaxe,End,End City,Yes
+END_STONE_BRICKS,Pickaxe,n/a,n/a,Yes
+MAGMA_BLOCK,Pickaxe,Nether,Everywhere,No
+NETHER_WART_BLOCK,Pickaxe,n/a,n/a,Yes
+RED_NETHER_BRICKS,Pickaxe,n/a,n/a,Yes
+BONE_BLOCK,Pickaxe,Overworld/Nether,Underground/Everywhere,Yes
+OBSERVER,Pickaxe,n/a,n/a,Yes
+SHULKER_BOX,Pickaxe,n/a,n/a,Yes
+GLAZED_TERRACOTTA,Pickaxe,n/a,n/a,Yes
+CONCRETE,Pickaxe,n/a,n/a,Yes
+CONCRETE_POWDER,Shovel,n/a,n/a,Yes
+KELP,Any,Overworld,Ocean,No
+DRIED_KELP_BLOCK,Pickaxe,n/a,n/a,Yes
+SCAFFOLDING,Axe,n/a,n/a,Yes
+LOOM,Axe,n/a,n/a,Yes
+BARREL,Axe,Overworld,Village,Yes
+SMOKER,Pickaxe,Overworld,Village,Yes
+BLAST_FURNACE,Pickaxe,Overworld,Village,Yes
+CARTOGRAPHY_TABLE,Axe,Overworld,Village,Yes
+FLETCHING_TABLE,Axe,Overworld,Village,Yes
+GRINDSTONE,Pickaxe,Overworld,Village,Yes
+LECTERN,Axe,Overworld,Village,Yes
+SMITHING_TABLE,Pickaxe,Overworld,Village,Yes
+STONECUTTER,Pickaxe,Overworld,Village,Yes
+BELL,Pickaxe,Overworld,Village,Yes
+LANTERN,Pickaxe,Overworld,Village,Yes
+SOUL_LANTERN,Pickaxe,n/a,n/a,Yes
+CAMPFIRE,Axe,n/a,n/a,Yes
+SOUL_CAMPFIRE,Axe,n/a,n/a,Yes
+SHROOMLIGHT,Pickaxe,Nether,Wood Biomes,No
+COMPOSTER,Axe,Overworld,Village,Yes
+TARGET,Axe,n/a,n/a,Yes
+NETHERITE_BLOCK,Pickaxe,n/a,n/a,Yes
+ANCIENT_DEBRIS,Pickaxe,Nether,Underground,No
+CRYING_OBSIDIAN,Pickaxe,n/a,n/a,Yes
+RESPAWN_ANCHOR,Pickaxe,n/a,n/a,Yes
+LODESTONE,Pickaxe,n/a,n/a,Yes
+BLACKSTONE,Pickaxe,Nether,Basalt Delta,No
+AMETHYST_BLOCK,Pickaxe,Overworld,Amethyst Geode,No
+TUFF,Pickaxe,Overworld,Underground,No
+CALCITE,Pickaxe,Overwolrd,Amethyst Geode,No
+TINTED_GLASS,Pickaxe,n/a,n/a,Yes
+POWDER_SNOW,Bucket,Overworld,Snow Mountains,No
+SCULK_SENSOR,Hoe,Overworld,Deep Dark,No
+SCULK,Hoe,Overworld,Deep Dark,No
+SCULK_VEIN,Hoe,Overworld,Deep Dark,No
+SCULK_CATALYST,Hoe,Overworld,Deep Dark,No
+SCULK_SHRIEKER,Hoe,Overworld,Deep Dark,No
+COPPER_BLOCK,Pickaxe,n/a,n/a,Yes
+COPPER_ORE,Pickaxe,Overworld,Underground,No
+MUD,Shovel,n/a,n/a,No
+DEEPSLATE,Pickaxe,Overworld,Deep Dark,No
+FROGLIGHT,Pickaxe,n/a,n/a,No
