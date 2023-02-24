@@ -19,10 +19,12 @@ public class blockData {
     public static void main(String... args) {
         List<Block> blocks = readBooksFromCSV("data/blocks2.csv");
 
+        System.out.println(blocks.get(5).getName());
+
         // let's print all the person read from CSV file
-        for (Block b : blocks) {
-            System.out.println(b);
-        }
+        //for (Block b : blocks) {
+           // System.out.println(b);
+       // }
 
 
     }

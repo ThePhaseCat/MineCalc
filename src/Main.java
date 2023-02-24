@@ -1,17 +1,13 @@
-import net.querz.nbt.io.NBTInputStream;
-import net.querz.nbt.io.NBTUtil;
-import net.querz.nbt.io.NamedTag;
-import net.querz.nbt.tag.CompoundTag;
-
 import javax.swing.*;
-import java.awt.*;
 import java.io.*;
-import java.util.Scanner; //for reading keyboard input and Files
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.io.BufferedReader; //Fast way to read large files and other data streams
-import java.io.FileReader; //used when using BufferedReader to read a File
-import net.querz.nbt.tag.CompoundTag;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 public class Main{
@@ -19,29 +15,76 @@ public class Main{
     static Area area = new Area(0, 0, 0);
     static AreaEstimation areaEstimation = new AreaEstimation(0, 0, 0, 0);
 
-    static ArrayList<String[]> blockInfo = new ArrayList<String[]>();
+    static List<Block2> blocks = readBooksFromCSV("data/blocks2.csv");
 
+    private static java.util.List<Block2> readBooksFromCSV(String fileName) {
+        List<Block2> blocks = new ArrayList<>();
+        Path pathToFile = Paths.get(fileName);
 
-    public static ArrayList<String[]> readDataFromFile(String filename) throws IOException {
-        FileReader file = new FileReader(filename);
-        BufferedReader myFile = new BufferedReader(file);
+        // create an instance of BufferedReader
+        // using try with resource, Java 7 feature to close resources
+        try (BufferedReader br = Files.newBufferedReader(pathToFile,
+                StandardCharsets.US_ASCII)) {
 
-        ArrayList<String[]> csvdata = new ArrayList<String[]>();
-        String[] row;
-        String line = myFile.readLine();
-        while (line != null) {
-            row = line.split(",");
-            csvdata.add(row);
-            line = myFile.readLine();
+            // read the first line from the text file
+            String line = br.readLine();
+
+            // loop until all lines are read
+            while (line != null) {
+
+                // use string.split to load a string array with the values from
+                // each line of
+                // the file, using a comma as the delimiter
+                String[] attributes = line.split(",");
+
+                Block2 block = createBlock2(attributes);
+
+                // adding book into ArrayList
+                blocks.add(block);
+
+                // read next line before looping
+                // if end of file reached, line would be null
+                line = br.readLine();
+            }
+
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
         }
-        myFile.close();
-        return csvdata;
+
+        return blocks;
     }
 
-    public static void main(String[] args) throws IOException {
-        //define stuff here
+    private static Block2 createBlock2(String[] metadata) {
+        String name = metadata[0];
+        String tool = metadata[1];
+        String dim = metadata[2];
+        String biome = metadata[3];
+        String craftable = metadata[4];
 
-        blockInfo = readDataFromFile("data/blocks.csv");
+        // create and return book of this metadata
+        return new Block2(name, tool, dim, biome, craftable);
+    }
+
+    public static Block2 getBlock(String name){
+        for (Block2 block : blocks) {
+            if (block.getName().equals(name)) {
+                return block;
+            }
+        }
+        return null;
+    }
+
+    //write code to get the position of a block in the list
+    public static int getBlockIndex(String name){
+        for (int i = 0; i < blocks.size(); i++) {
+            if (blocks.get(i).getName().equals(name)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    public static void main(String[] args){
+        //define stuff here
 
         JFrame mainScreen = new JFrame("MineCalc - Selection Service");
         mainScreen.setLayout(new BoxLayout(mainScreen.getContentPane(), BoxLayout.Y_AXIS));
@@ -386,7 +429,108 @@ public class Main{
 
 
     public static void block(){
-        System.out.println(blockInfo.get(4));
+        AtomicReference<String> blockNameFixed = new AtomicReference<>("");
+        AtomicReference<String> blockTool = new AtomicReference<>("");
+        AtomicReference<String> blockDim = new AtomicReference<>("");
+        AtomicReference<String> blockLoc = new AtomicReference<>("");
+        AtomicReference<String> blockCraft = new AtomicReference<>("");
 
+        JFrame blockScreen = new JFrame("MineCalc - Block Service");
+        blockScreen.setLayout(new BoxLayout(blockScreen.getContentPane(), BoxLayout.Y_AXIS));
+
+        JLabel blockNameInputLabel = new JLabel("Enter block name below!");
+        JTextField blockNameInput = new JTextField();
+        JLabel blockInfo = new JLabel("Block Name: " + blockNameFixed);
+        JLabel blockToolLabel = new JLabel("Tool: " + blockTool);
+        JLabel blockDimLabel = new JLabel("Dimension: " + blockDim);
+        JLabel blockLocLabel = new JLabel("Biome: " + blockLoc);
+        JLabel blockCraftLabel = new JLabel("Craftable: " + blockCraft);
+
+        blockNameInput.addActionListener(e -> {
+            String blockName = blockNameInput.getText();
+            blockName = blockName.replace(" ", "_");
+            blockName = blockName.toUpperCase();
+            if(getBlockIndex(blockName)==-1){
+                blockInfo.setText("Block Name: Not Found");
+                blockToolLabel.setText("Tool: Not Found");
+                blockDimLabel.setText("Dimension: Not Found");
+                blockLocLabel.setText("Biome: Not Found");
+                blockCraftLabel.setText("Craftable: Not Found");
+            }
+            else{
+                blockNameFixed.set(blocks.get(getBlockIndex(blockName)).getName());
+                blockTool.set(blocks.get(getBlockIndex(blockName)).getTool());
+                blockDim.set(blocks.get(getBlockIndex(blockName)).getDim());
+                blockLoc.set(blocks.get(getBlockIndex(blockName)).getBiome());
+                blockCraft.set(blocks.get(getBlockIndex(blockName)).getCraftable());
+
+                blockInfo.setText("Block Name: " + blockNameFixed);
+                blockToolLabel.setText("Tool: " + blockTool);
+                blockDimLabel.setText("Dimension: " + blockDim);
+                blockLocLabel.setText("Biome: " + blockLoc);
+                blockCraftLabel.setText("Craftable: " + blockCraft);
+            }
+        });
+
+        blockScreen.add(blockNameInputLabel);
+        blockScreen.add(blockNameInput);
+        blockScreen.add(blockInfo);
+        blockScreen.add(blockToolLabel);
+        blockScreen.add(blockDimLabel);
+        blockScreen.add(blockLocLabel);
+        blockScreen.add(blockCraftLabel);
+
+        blockScreen.setSize(300, 200);
+        blockScreen.setVisible(true);
+        blockScreen.setLocationRelativeTo(null);
+        blockScreen.setLocation(600, 200);
+
+        //System.out.println(blocks.get(5).getName());
     }
+}
+
+class Block2 {
+    private String name;
+    private String tool;
+
+    private String dim;
+
+    private String biome;
+
+    private String craftable;
+
+    public Block2(String name, String tool, String dim, String biome, String craftable) {
+        this.name = name;
+        this.tool = tool;
+        this.dim = dim;
+        this.biome = biome;
+        this.craftable = craftable;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getTool() {
+        return tool;
+    }
+
+    public String getDim() {
+        return dim;
+    }
+
+    public String getBiome() {
+        return biome;
+    }
+
+    public String getCraftable() {
+        return craftable;
+    }
+
+    @Override
+    public String toString() {
+        return ""+name+","+tool+","+dim+","+biome+","+craftable+"";
+    }
+
+
 }
