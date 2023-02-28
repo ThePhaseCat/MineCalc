@@ -27,3 +27,10 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+structures/NBTExplorer-2.8.0.zip
+structures/NBTExplorer-2.8.0/NBTExplorer.exe
+structures/NBTExplorer-2.8.0/NBTExplorer.exe.config
+structures/NBTExplorer-2.8.0/NBTModel.dll
+structures/NBTExplorer-2.8.0/NBTUtil.exe
+structures/NBTExplorer-2.8.0/NBTUtil.exe.config
+structures/NBTExplorer-2.8.0/Substrate.dll
