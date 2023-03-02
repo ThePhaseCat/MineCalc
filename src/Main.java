@@ -1,3 +1,6 @@
+import net.querz.nbt.io.NBTUtil;
+import net.querz.nbt.tag.CompoundTag;
+
 import javax.swing.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -101,7 +104,7 @@ public class Main{
         });
 
         structureButton.addActionListener(e -> {
-
+            structure();
         });
 
         blockButton.addActionListener(e -> {
@@ -423,7 +426,44 @@ public class Main{
 
 
     //put stuff for structure data ana here
+    public static void structure(){
+        AtomicReference<String> structureFileName = new AtomicReference<>("");
+        AtomicReference<String> trueFileName = new AtomicReference<>("");
+        AtomicReference<CompoundTag> structureData = new AtomicReference<>(new CompoundTag());
 
+        JFrame structureScreen = new JFrame("MineCalc - Structure Service");
+        structureScreen.setLayout(new BoxLayout(structureScreen.getContentPane(), BoxLayout.Y_AXIS));
+
+        JLabel structureNameInfo1Label = new JLabel("Put structure file in the structures folder");
+        JLabel structureNameInfo2Label = new JLabel("Then, type the filename of the structure file EXACLTY");
+        JTextField structureNameInput = new JTextField();
+
+
+        structureNameInput.addActionListener(e -> {
+            structureFileName.set(structureNameInput.getText());
+            trueFileName.set("structures/" + structureFileName.get() + ".nbt");
+            try {
+                structureData.set((CompoundTag) NBTUtil.read(String.valueOf(trueFileName)).getTag());
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+            String test = structureData.get().getListTag("palette").toString();
+
+            System.out.println(test);
+
+        });
+
+        structureScreen.add(structureNameInfo1Label);
+        structureScreen.add(structureNameInfo2Label);
+        structureScreen.add(structureNameInput);
+
+        structureScreen.setSize(300, 200);
+        structureScreen.setVisible(true);
+        structureScreen.setLocationRelativeTo(null);
+        structureScreen.setLocation(600, 200);
+
+    }
     //end of that stuff
 
 
