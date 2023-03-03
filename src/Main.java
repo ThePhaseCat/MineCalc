@@ -1,5 +1,8 @@
 import net.querz.nbt.io.NBTUtil;
 import net.querz.nbt.tag.CompoundTag;
+import net.querz.nbt.tag.ListTag;
+import net.querz.nbt.tag.StringTag;
+import net.querz.nbt.tag.Tag;
 
 import javax.swing.*;
 import java.io.*;
@@ -19,6 +22,23 @@ public class Main{
     static AreaEstimation areaEstimation = new AreaEstimation(0, 0, 0, 0);
 
     static List<Block2> blocks = readBooksFromCSV("data/blocks2.csv");
+
+    static int countOccurrences(String full, String word)
+    {
+        // split the string by spaces in a
+        String a[] = full.split(" ");
+
+        // search for pattern in a
+        int count = 0;
+        for (int i = 0; i < a.length; i++)
+        {
+            // if match found increase count
+            if (word.equals(a[i]))
+                count++;
+        }
+
+        return count;
+    }
 
     private static java.util.List<Block2> readBooksFromCSV(String fileName) {
         List<Block2> blocks = new ArrayList<>();
@@ -75,6 +95,13 @@ public class Main{
             }
         }
         return null;
+    }
+
+    public static String removeLastChar(String str) {
+        if (str == null || str.length() == 0) {
+            return str;
+        }
+        return str.substring(0, str.length() - 1);
     }
 
     //write code to get the position of a block in the list
@@ -437,26 +464,49 @@ public class Main{
         JLabel structureNameInfo1Label = new JLabel("Put structure file in the structures folder");
         JLabel structureNameInfo2Label = new JLabel("Then, type the filename of the structure file EXACLTY");
         JTextField structureNameInput = new JTextField();
+        JLabel structureNameLabel = new JLabel("Structure Name: ");
+        JLabel structureBlockAmountLabel = new JLabel("Blocks: ");
 
 
         structureNameInput.addActionListener(e -> {
             structureFileName.set(structureNameInput.getText());
+            structureNameLabel.setText("Structure Name: " + structureFileName.get());
             trueFileName.set("structures/" + structureFileName.get() + ".nbt");
             try {
                 structureData.set((CompoundTag) NBTUtil.read(String.valueOf(trueFileName)).getTag());
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
+            ListTag blockSelection = structureData.get().getListTag("palette"); //brings list down
 
-            String test = structureData.get().getListTag("palette").toString();
+            int blockCount = (blockSelection.size()); //gets size of list/amount of blocks
 
-            System.out.println(test);
+            ArrayList<String> blockNames = new ArrayList<String>();
+
+            for (int i = 0; i < blockCount; i++) {
+                System.out.println(blockSelection.get(i));
+                CompoundTag blockValue = (CompoundTag) blockSelection.get(i);
+                System.out.println(blockValue.getString("Name"));
+                blockNames.add(blockValue.getString("Name"));
+            }
+
+            //from the blockNames arrayList, put each element in the arrayList into a new string containing all the elements
+
+            String blockNamesString = "";
+
+            for (String blocks : blockNames){
+                blockNamesString = blockNamesString + blocks + ", ";
+            }
+
+            structureBlockAmountLabel.setText("Blocks: " + blockNamesString);
 
         });
 
         structureScreen.add(structureNameInfo1Label);
         structureScreen.add(structureNameInfo2Label);
         structureScreen.add(structureNameInput);
+        structureScreen.add(structureNameLabel);
+        structureScreen.add(structureBlockAmountLabel);
 
         structureScreen.setSize(300, 200);
         structureScreen.setVisible(true);
