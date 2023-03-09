@@ -5,6 +5,8 @@ import net.querz.nbt.tag.StringTag;
 import net.querz.nbt.tag.Tag;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -97,13 +99,6 @@ public class Main{
         return null;
     }
 
-    public static String removeLastChar(String str) {
-        if (str == null || str.length() == 0) {
-            return str;
-        }
-        return str.substring(0, str.length() - 1);
-    }
-
     //write code to get the position of a block in the list
     public static int getBlockIndex(String name){
         for (int i = 0; i < blocks.size(); i++) {
@@ -122,9 +117,10 @@ public class Main{
         JButton areaButton = new JButton("Area Service");
         JButton structureButton = new JButton("Structure Service");
         JButton blockButton = new JButton("Block/Item Index Service");
-        areaButton.setBounds(0, 0, 100, 100);
-        structureButton.setBounds(0, 0, 100, 100);
-        blockButton.setBounds(0, 0, 100, 100);
+        JButton closeMainButton = new JButton("Exit Program");
+        areaButton.setBounds(0, 0, 300, 100);
+        structureButton.setBounds(0, 0, 300, 100);
+        blockButton.setBounds(0, 0, 300, 100);
 
         areaButton.addActionListener(e -> {
             area();
@@ -137,10 +133,14 @@ public class Main{
         blockButton.addActionListener(e -> {
             block();
         });
+        closeMainButton.addActionListener(e -> {
+            mainScreen.dispose();
+        });
 
         mainScreen.add(areaButton);
         mainScreen.add(structureButton);
         mainScreen.add(blockButton);
+        mainScreen.add(closeMainButton);
 
         mainScreen.setSize(300, 200);
         mainScreen.setVisible(true);
@@ -159,6 +159,7 @@ public class Main{
         JButton changeDataButton = new JButton("Change Area Data");
         JButton getDataButton = new JButton("Get Area Data");
         JButton getEstimationsButton = new JButton("Get Estimations from Area Data");
+        JButton closeAreaButton = new JButton("Close Window");
 
         changeDataButton.setBounds(0, 0, 100, 100);
         getDataButton.setBounds(0, 0, 100, 100);
@@ -175,10 +176,14 @@ public class Main{
         getEstimationsButton.addActionListener(e -> {
             areaGetEstimations1();
         });
+        closeAreaButton.addActionListener(e -> {
+            areaScreen.dispose();
+        });
 
         areaScreen.add(changeDataButton);
         areaScreen.add(getDataButton);
         areaScreen.add(getEstimationsButton);
+        areaScreen.add(closeAreaButton);
 
         areaScreen.setSize(300, 200);
         areaScreen.setVisible(true);
@@ -212,6 +217,27 @@ public class Main{
         widthField.setHorizontalAlignment(JTextField.CENTER);
         heightField.setHorizontalAlignment(JTextField.CENTER);
 
+        JButton saveButton = new JButton("Save");
+
+        saveButton.addActionListener(e -> {
+            if(lengthField.getText().equals("")){
+                area.setLength(0);
+            }else{
+                area.setLength(Integer.parseInt(lengthField.getText()));
+            }
+            if(widthField.getText().equals("")){
+                area.setWidth(0);
+            }else{
+                area.setWidth(Integer.parseInt(widthField.getText()));
+            }
+            if(heightField.getText().equals("")){
+                area.setHeight(0);
+            }else{
+                area.setHeight(Integer.parseInt(heightField.getText()));
+            }
+            areaChangeDataScreen.dispose();
+        });
+
         lengthField.addActionListener(e -> {
             area.setLength(Integer.parseInt(lengthField.getText()));
             lengthLabel.setText("Length: " + area.getLength());
@@ -234,6 +260,7 @@ public class Main{
         areaChangeDataScreen.add(widthField);
         areaChangeDataScreen.add(heightLabel);
         areaChangeDataScreen.add(heightField);
+        areaChangeDataScreen.add(saveButton);
 
 
         areaChangeDataScreen.setSize(500, 300);
@@ -250,16 +277,22 @@ public class Main{
         JLabel widthLabel = new JLabel("Width: " + area.getWidth());
         JLabel heightLabel = new JLabel("Height: " + area.getHeight());
         JLabel areaLabel = new JLabel("Area: " + area.AreaCalc());
+        JButton close = new JButton("Close Window");
 
         lengthLabel.setHorizontalAlignment(JLabel.CENTER);
         widthLabel.setHorizontalAlignment(JLabel.CENTER);
         heightLabel.setHorizontalAlignment(JLabel.CENTER);
         areaLabel.setHorizontalAlignment(JLabel.CENTER);
 
+        close.addActionListener(e -> {
+            areaGetDataScreen.dispose();
+        });
+
         areaGetDataScreen.add(lengthLabel);
         areaGetDataScreen.add(widthLabel);
         areaGetDataScreen.add(heightLabel);
         areaGetDataScreen.add(areaLabel);
+        areaGetDataScreen.add(close);
 
         areaGetDataScreen.setSize(300, 200);
         areaGetDataScreen.setVisible(true);
@@ -438,12 +471,18 @@ public class Main{
         JLabel materialLabel = new JLabel("Material: " + material);
         JLabel unbreakingLabel = new JLabel("Unbreaking: " + unbreaking);
         JLabel finalResults = new JLabel("You will need " + finalResult + " " + tool + "s to mine this area.");
+        JButton closeButton = new JButton("Close Window");
+
+        closeButton.addActionListener(e -> {
+            areaGetEstimationsScreen.dispose();
+        });
 
         areaGetEstimationsScreen.add(areaLabel);
         areaGetEstimationsScreen.add(toolLabel);
         areaGetEstimationsScreen.add(materialLabel);
         areaGetEstimationsScreen.add(unbreakingLabel);
         areaGetEstimationsScreen.add(finalResults);
+        areaGetEstimationsScreen.add(closeButton);
 
         areaGetEstimationsScreen.setSize(300, 200);
         areaGetEstimationsScreen.setVisible(true);
@@ -461,62 +500,67 @@ public class Main{
         JFrame structureScreen = new JFrame("MineCalc - Structure Service");
         structureScreen.setLayout(new BoxLayout(structureScreen.getContentPane(), BoxLayout.Y_AXIS));
 
-        JLabel structureNameInfo1Label = new JLabel("Put structure file in the structures folder");
-        JLabel structureNameInfo2Label = new JLabel("Then, type the filename of the structure file EXACLTY");
-        JTextField structureNameInput = new JTextField();
-        JLabel structureNameLabel = new JLabel("Structure Name: ");
-        JLabel structureBlockAmountLabel = new JLabel("Blocks: ");
+        JLabel structureInfo = new JLabel("Structure File Name: ");
+        JButton loadStructureButton = new JButton("Load Structure");
+        JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir"));
+        FileNameExtensionFilter fileFilt = new FileNameExtensionFilter("Structure File (.nbt)", "nbt");
+        fileChooser.addChoosableFileFilter(fileFilt);
+        fileChooser.setFileFilter(fileFilt);
+        JLabel structureBlocks = new JLabel("Blocks in Structure: Nothing loaded!");
+        JButton closeButton = new JButton("Close Window");
 
+        loadStructureButton.addActionListener(e ->{
+            int returnValue = fileChooser.showOpenDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                structureFileName.set(selectedFile.getName());
+                structureInfo.setText("Structure File Name: " + structureFileName.get());
+                try {
+                    structureData.set((CompoundTag) NBTUtil.read(String.valueOf(selectedFile)).getTag());
+                } catch (IOException ex) {
+                    structureInfo.setText("Structure File Name: " + structureFileName.get() + " - Error loading file");
+                    structureBlocks.setText("Blocks in Structure: Error loading file!");
+                }
+                ListTag blockSelection = structureData.get().getListTag("palette"); //brings list down
 
-        structureNameInput.addActionListener(e -> {
-            structureFileName.set(structureNameInput.getText());
-            structureNameLabel.setText("Structure Name: " + structureFileName.get());
-            trueFileName.set("structures/" + structureFileName.get() + ".nbt");
-            try {
-                structureData.set((CompoundTag) NBTUtil.read(String.valueOf(trueFileName)).getTag());
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                int blockCount = (blockSelection.size()); //gets size of list/amount of blocks
+
+                ArrayList<String> blockNames = new ArrayList<String>();
+
+                for (int i = 0; i < blockCount; i++) {
+                    //System.out.println(blockSelection.get(i));
+                    CompoundTag blockValue = (CompoundTag) blockSelection.get(i);
+                    //System.out.println(blockValue.getString("Name"));
+                    blockNames.add(blockValue.getString("Name"));
+                }
+
+                String blockNamesString = "";
+
+                for (String blocks : blockNames){
+                    blockNamesString = blockNamesString + blocks + ", ";
+                }
+
+                blockNamesString = blockNamesString.substring(0, blockNamesString.length() - 2);
+
+                structureBlocks.setText("Blocks in Structure: " + blockNamesString);
             }
-            ListTag blockSelection = structureData.get().getListTag("palette"); //brings list down
+                });
 
-            int blockCount = (blockSelection.size()); //gets size of list/amount of blocks
-
-            ArrayList<String> blockNames = new ArrayList<String>();
-
-            for (int i = 0; i < blockCount; i++) {
-                System.out.println(blockSelection.get(i));
-                CompoundTag blockValue = (CompoundTag) blockSelection.get(i);
-                System.out.println(blockValue.getString("Name"));
-                blockNames.add(blockValue.getString("Name"));
-            }
-
-            //from the blockNames arrayList, put each element in the arrayList into a new string containing all the elements
-
-            String blockNamesString = "";
-
-            for (String blocks : blockNames){
-                blockNamesString = blockNamesString + blocks + ", ";
-            }
-
-            structureBlockAmountLabel.setText("Blocks: " + blockNamesString);
-
+        closeButton.addActionListener(e -> {
+            structureScreen.dispose();
         });
 
-        structureScreen.add(structureNameInfo1Label);
-        structureScreen.add(structureNameInfo2Label);
-        structureScreen.add(structureNameInput);
-        structureScreen.add(structureNameLabel);
-        structureScreen.add(structureBlockAmountLabel);
+        structureScreen.add(structureInfo);
+        structureScreen.add(loadStructureButton);
+        structureScreen.add(structureBlocks);
+        structureScreen.add(closeButton);
 
-        structureScreen.setSize(300, 200);
+        structureScreen.setSize(1000, 200);
         structureScreen.setVisible(true);
         structureScreen.setLocationRelativeTo(null);
-        structureScreen.setLocation(600, 200);
+        structureScreen.setLocation(200, 200);
 
     }
-    //end of that stuff
-
-
 
     public static void block(){
         AtomicReference<String> blockNameFixed = new AtomicReference<>("");
@@ -535,6 +579,7 @@ public class Main{
         JLabel blockDimLabel = new JLabel("Dimension: " + blockDim);
         JLabel blockLocLabel = new JLabel("Biome: " + blockLoc);
         JLabel blockCraftLabel = new JLabel("Craftable: " + blockCraft);
+        JButton closeButton = new JButton("Close Window");
 
         blockNameInput.addActionListener(e -> {
             String blockName = blockNameInput.getText();
@@ -562,6 +607,10 @@ public class Main{
             }
         });
 
+        closeButton.addActionListener(e -> {
+            blockScreen.dispose();
+        });
+
         blockScreen.add(blockNameInputLabel);
         blockScreen.add(blockNameInput);
         blockScreen.add(blockInfo);
@@ -569,6 +618,7 @@ public class Main{
         blockScreen.add(blockDimLabel);
         blockScreen.add(blockLocLabel);
         blockScreen.add(blockCraftLabel);
+        blockScreen.add(closeButton);
 
         blockScreen.setSize(300, 200);
         blockScreen.setVisible(true);
