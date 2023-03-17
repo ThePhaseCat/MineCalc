@@ -33,25 +33,19 @@ public class blockData {
         List<Block> blocks = new ArrayList<>();
         Path pathToFile = Paths.get(fileName);
 
-        // create an instance of BufferedReader
-        // using try with resource, Java 7 feature to close resources
         try (BufferedReader br = Files.newBufferedReader(pathToFile,
                 StandardCharsets.US_ASCII)) {
 
-            // read the first line from the text file
+            // read the first line from the file
             String line = br.readLine();
 
             // loop until all lines are read
             while (line != null) {
-
-                // use string.split to load a string array with the values from
-                // each line of
-                // the file, using a comma as the delimiter
                 String[] attributes = line.split(",");
 
                 Block block = createBlock(attributes);
 
-                // adding book into ArrayList
+                // adding block into list
                 blocks.add(block);
 
                 // read next line before looping
@@ -73,7 +67,7 @@ public class blockData {
         String biome = metadata[3];
         String craftable = metadata[4];
 
-        // create and return book of this metadata
+        // create and return block of this metadata
         return new Block(name, tool, dim, biome, craftable);
     }
 

@@ -23,52 +23,27 @@ public class Main{
     static Area area = new Area(0, 0, 0);
     static AreaEstimation areaEstimation = new AreaEstimation(0, 0, 0, 0);
 
-    static List<Block2> blocks = readBooksFromCSV("data/blocks2.csv");
+    static List<Block2> blocks = readBlocksFromCSV("data/blocks2.csv");
 
-    static int countOccurrences(String full, String word)
-    {
-        // split the string by spaces in a
-        String a[] = full.split(" ");
-
-        // search for pattern in a
-        int count = 0;
-        for (int i = 0; i < a.length; i++)
-        {
-            // if match found increase count
-            if (word.equals(a[i]))
-                count++;
-        }
-
-        return count;
-    }
-
-    private static java.util.List<Block2> readBooksFromCSV(String fileName) {
+    private static java.util.List<Block2> readBlocksFromCSV(String fileName) {
         List<Block2> blocks = new ArrayList<>();
         Path pathToFile = Paths.get(fileName);
 
-        // create an instance of BufferedReader
-        // using try with resource, Java 7 feature to close resources
         try (BufferedReader br = Files.newBufferedReader(pathToFile,
                 StandardCharsets.US_ASCII)) {
 
-            // read the first line from the text file
             String line = br.readLine();
 
             // loop until all lines are read
             while (line != null) {
 
-                // use string.split to load a string array with the values from
-                // each line of
-                // the file, using a comma as the delimiter
                 String[] attributes = line.split(",");
 
                 Block2 block = createBlock2(attributes);
 
-                // adding book into ArrayList
+                // adding block into list
                 blocks.add(block);
 
-                // read next line before looping
-                // if end of file reached, line would be null
                 line = br.readLine();
             }
 
@@ -88,15 +63,6 @@ public class Main{
 
         // create and return book of this metadata
         return new Block2(name, tool, dim, biome, craftable);
-    }
-
-    public static Block2 getBlock(String name){
-        for (Block2 block : blocks) {
-            if (block.getName().equals(name)) {
-                return block;
-            }
-        }
-        return null;
     }
 
     //write code to get the position of a block in the list
