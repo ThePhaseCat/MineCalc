@@ -15,7 +15,6 @@ public class AreaEstimation {
         this.enchantIncrease = enchantIncrease;
         this.areaSelected = areaSelected;
     }
-
     //wooden, stone, iron, gold, diamond, netherite
     //60, 132, 251, 33, 1562, 2031
     //unbreaking levels
@@ -25,22 +24,17 @@ public class AreaEstimation {
     public int getToolSelect() {
         return toolSelect;
     }
-
     public double getDurability() {
         return durability;
     }
-
     public double getEnchantIncrease() {
         return enchantIncrease;
     }
-
     public double getAreaSelected() {
         return areaSelected;
     }
-
     public void setToolSelect(int toolSelect) {
         this.toolSelect = toolSelect;
-
         if (toolSelect == 1){
             this.durability = 60 * this.enchantIncrease;
         }
@@ -60,11 +54,8 @@ public class AreaEstimation {
             this.durability = 2031 * this.enchantIncrease;
         }
     }
-
-
     public void setEnchantIncrease(double enchantIncrease) {
         this.enchantIncrease = enchantIncrease;
-
         if (this.toolSelect == 1){
             this.durability = 60 * this.enchantIncrease;
         }
@@ -84,7 +75,6 @@ public class AreaEstimation {
             this.durability = 2031 * this.enchantIncrease;
         }
     }
-
     public void setAreaSelected(double areaSelected) {
         this.areaSelected = areaSelected;
     }

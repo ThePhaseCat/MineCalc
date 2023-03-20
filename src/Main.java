@@ -101,6 +101,7 @@ public class Main{
         });
         closeMainButton.addActionListener(e -> {
             mainScreen.dispose();
+            System.exit(0);
         });
 
         mainScreen.add(areaButton);
@@ -487,7 +488,9 @@ public class Main{
                     structureInfo.setText("Structure File Name: " + structureFileName.get() + " - Error loading file");
                     structureBlocks.setText("Blocks in Structure: Error loading file!");
                 }
+                //System.out.println(structureData.get());
                 ListTag blockSelection = structureData.get().getListTag("palette"); //brings list down
+                //System.out.println(blockSelection);
 
                 int blockCount = (blockSelection.size()); //gets size of list/amount of blocks
 
