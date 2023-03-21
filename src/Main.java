@@ -1,12 +1,9 @@
 import net.querz.nbt.io.NBTUtil;
 import net.querz.nbt.tag.CompoundTag;
 import net.querz.nbt.tag.ListTag;
-import net.querz.nbt.tag.StringTag;
-import net.querz.nbt.tag.Tag;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -473,8 +470,18 @@ public class Main{
         FileNameExtensionFilter fileFilt = new FileNameExtensionFilter("Structure File (.nbt)", "nbt");
         fileChooser.addChoosableFileFilter(fileFilt);
         fileChooser.setFileFilter(fileFilt);
-        JLabel structureBlocks = new JLabel("Blocks in Structure: Nothing loaded!");
+        JTextArea structureBlocks = new JTextArea("Blocks in Structure: Nothing loaded!");
         JButton closeButton = new JButton("Close Window");
+
+        structureBlocks.setEditable(false);
+
+        structureBlocks.setLineWrap(true);
+
+        structureBlocks.setWrapStyleWord(true);
+
+        JScrollPane scroll = new JScrollPane (structureBlocks);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         loadStructureButton.addActionListener(e ->{
             int returnValue = fileChooser.showOpenDialog(null);
@@ -511,6 +518,8 @@ public class Main{
 
                 blockNamesString = blockNamesString.substring(0, blockNamesString.length() - 2);
 
+
+
                 structureBlocks.setText("Blocks in Structure: " + blockNamesString);
             }
                 });
@@ -521,7 +530,8 @@ public class Main{
 
         structureScreen.add(structureInfo);
         structureScreen.add(loadStructureButton);
-        structureScreen.add(structureBlocks);
+        structureScreen.add(scroll);
+        //structureScreen.add(structureBlocks);
         structureScreen.add(closeButton);
 
         structureScreen.setSize(1000, 200);

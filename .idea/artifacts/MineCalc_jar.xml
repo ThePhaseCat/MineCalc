@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MineCalc:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MineCalc_jar</output-path>
+    <root id="archive" name="MineCalc.jar">
+      <element id="module-output" name="MineCalc" />
+      <element id="library" level="application" name="NBT" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../libaries/NBT-6.1/build/libs/nbt-6.1.jar" path-in-jar="/" />
+      <element id="file-copy" path="$PROJECT_DIR$/data/blocks2.csv" />
+    </root>
+  </artifact>
+</component>
