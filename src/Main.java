@@ -454,8 +454,6 @@ public class Main{
         areaGetEstimationsScreen.setLocation(600, 200);
     }
 
-
-    //put stuff for structure data ana here
     public static void structure(){
         AtomicReference<String> structureFileName = new AtomicReference<>("");
         AtomicReference<String> trueFileName = new AtomicReference<>("");
@@ -492,8 +490,8 @@ public class Main{
                 try {
                     structureData.set((CompoundTag) NBTUtil.read(String.valueOf(selectedFile)).getTag());
                 } catch (IOException ex) {
-                    structureInfo.setText("Structure File Name: " + structureFileName.get() + " - Error loading file");
-                    structureBlocks.setText("Blocks in Structure: Error loading file!");
+                    structureInfo.setText("Structure File Name: " + structureFileName.get() + " - Error loading file! File not found, file not a .nbt, or file is corrupted!");
+                    structureBlocks.setText("Blocks in Structure: Error loading file! File not found, file not a .nbt, or file is corrupted!");
                 }
                 //System.out.println(structureData.get());
                 ListTag blockSelection = structureData.get().getListTag("palette"); //brings list down
@@ -557,7 +555,7 @@ public class Main{
         JLabel blockToolLabel = new JLabel("Tool: " + blockTool);
         JLabel blockDimLabel = new JLabel("Dimension: " + blockDim);
         JLabel blockLocLabel = new JLabel("Biome: " + blockLoc);
-        JLabel blockCraftLabel = new JLabel("Craftable: " + blockCraft);
+        JLabel blockCraftLabel = new JLabel("Can Craft: " + blockCraft);
         JButton closeButton = new JButton("Close Window");
 
         blockNameInput.addActionListener(e -> {
@@ -565,11 +563,11 @@ public class Main{
             blockName = blockName.replace(" ", "_");
             blockName = blockName.toUpperCase();
             if(getBlockIndex(blockName)==-1){
-                blockInfo.setText("Block Name: Not Found");
-                blockToolLabel.setText("Tool: Not Found");
-                blockDimLabel.setText("Dimension: Not Found");
-                blockLocLabel.setText("Biome: Not Found");
-                blockCraftLabel.setText("Craftable: Not Found");
+                blockInfo.setText("Block Name: Block not in database");
+                blockToolLabel.setText("Tool: Block not in database");
+                blockDimLabel.setText("Dimension: Block not in database");
+                blockLocLabel.setText("Biome: Block not in database");
+                blockCraftLabel.setText("Can Craft: Block not in database");
             }
             else{
                 blockNameFixed.set(blocks.get(getBlockIndex(blockName)).getName());
@@ -582,7 +580,7 @@ public class Main{
                 blockToolLabel.setText("Tool: " + blockTool);
                 blockDimLabel.setText("Dimension: " + blockDim);
                 blockLocLabel.setText("Biome: " + blockLoc);
-                blockCraftLabel.setText("Craftable: " + blockCraft);
+                blockCraftLabel.setText("Can Craft: " + blockCraft);
             }
         });
 
