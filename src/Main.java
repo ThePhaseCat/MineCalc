@@ -80,10 +80,12 @@ public class Main{
         JButton areaButton = new JButton("Area Service");
         JButton structureButton = new JButton("Structure Service");
         JButton blockButton = new JButton("Block/Item Index Service");
+        JButton creditsButton = new JButton("Credits");
         JButton closeMainButton = new JButton("Exit Program");
         areaButton.setBounds(0, 0, 300, 100);
         structureButton.setBounds(0, 0, 300, 100);
         blockButton.setBounds(0, 0, 300, 100);
+        creditsButton.setBounds(0, 0, 300, 100);
 
         areaButton.addActionListener(e -> {
             area();
@@ -96,6 +98,9 @@ public class Main{
         blockButton.addActionListener(e -> {
             block();
         });
+        creditsButton.addActionListener(e -> {
+            credits();
+        });
         closeMainButton.addActionListener(e -> {
             mainScreen.dispose();
             System.exit(0);
@@ -104,6 +109,7 @@ public class Main{
         mainScreen.add(areaButton);
         mainScreen.add(structureButton);
         mainScreen.add(blockButton);
+        mainScreen.add(creditsButton);
         mainScreen.add(closeMainButton);
 
         mainScreen.setSize(300, 200);
@@ -603,6 +609,32 @@ public class Main{
         blockScreen.setLocation(600, 200);
 
         //System.out.println(blocks.get(5).getName());
+    }
+
+    public static void credits()
+    {
+        JFrame creditsScreen = new JFrame("MineCalc - Credits");
+        creditsScreen.setLayout(new BoxLayout(creditsScreen.getContentPane(), BoxLayout.Y_AXIS));
+
+        JLabel credits = new JLabel("MineCalc was created by ThePhaseCat");
+        JLabel credits2 = new JLabel("MineCalc was created for a school project");
+        JLabel credits3 = new JLabel("MineCalc was last updated on May 8th, 2023");
+
+        JButton closeButton = new JButton("Close Window");
+
+        closeButton.addActionListener(e -> {
+            creditsScreen.dispose();
+        });
+
+        creditsScreen.add(credits);
+        creditsScreen.add(credits2);
+        creditsScreen.add(credits3);
+        creditsScreen.add(closeButton);
+
+        creditsScreen.setSize(300, 200);
+        creditsScreen.setVisible(true);
+        creditsScreen.setLocationRelativeTo(null);
+        creditsScreen.setLocation(600, 200);
     }
 }
 
